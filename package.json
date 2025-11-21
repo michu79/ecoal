@@ -1,0 +1,39 @@
+{
+  "name": "ecoal-controller",
+  "version": "1.0.0",
+  "description": "Home Assistant addon for eCoal furnace controller integration via MQTT",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "bun run src/index.ts",
+    "dev": "bun --watch --hot src/index.ts"
+  },
+  "dependencies": {
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.1",
+    "mqtt": "^5.3.4",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "winston": "^3.11.0",
+    "xml2js": "^0.6.2"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/node": "^20.10.5",
+    "@types/xml2js": "^0.4.14"
+  },
+  "engines": {
+    "bun": ">=1.0.0"
+  },
+  "keywords": [
+    "home-assistant",
+    "ecoal",
+    "furnace",
+    "mqtt",
+    "automation"
+  ],
+  "author": "Mateusz MTZD Zdrzałek",
+  "license": "MIT"
+}
