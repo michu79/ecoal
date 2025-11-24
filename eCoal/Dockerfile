@@ -24,6 +24,6 @@ LABEL \
     io.hass.description="Home Assistant addon for eCoal furnace controller integration via MQTT" \
     io.hass.arch="aarch64|i386|amd64" \
     io.hass.type="addon" \
-    io.hass.version="1.0.2"
+    io.hass.version="1.0.3"
 
 CMD ["./run.sh"]
