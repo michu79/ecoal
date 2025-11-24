@@ -62,8 +62,6 @@ export class ECoalService {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      console.log(await response.text(), url);
-
       logger.info(`Successfully set ${parameter} to ${value}`);
       return true;
     } catch (error) {

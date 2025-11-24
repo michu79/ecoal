@@ -67,7 +67,10 @@ export class MqttService {
       }
     });
 
-    const autoModeValue = data.cmd.device.reg[4]?.v;
+    const autoModeValue = data.cmd.device.reg.find(
+      (r) => r.tid === "tryb_auto_state",
+    )?.v;
+
     if (autoModeValue) {
       const stateTopic = `${this.config.mqtt_topic_prefix}/switch/${this.deviceId}/auto_mode/state`;
       this.mqttClient.publish(stateTopic, autoModeValue === "1" ? "ON" : "OFF");
@@ -80,7 +83,9 @@ export class MqttService {
 
       if (register?.v) {
         const stateTopic = `${this.config.mqtt_topic_prefix}/number/${this.deviceId}/${config.mqttUniqueId}/state`;
+
         this.mqttClient.publish(stateTopic, register.v);
+
         logger.debug(
           `Published number data: ${config.mqttUniqueId} = ${register.v}`,
         );

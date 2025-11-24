@@ -36,7 +36,15 @@ try {
 
     if (data) {
       if (mqttService.isConnected()) {
-        mqttService.publishSensorData(data);
+        try {
+          mqttService.publishSensorData(data);
+        } catch (error) {
+          logger.error("Error publishing sensor data:", error);
+          logger.error("Got data:");
+          console.log(JSON.stringify(data, null, 2));
+
+          throw new Error("Failed to publish sensor data");
+        }
       }
 
       logger.debug("eCoal data updated successfully");
