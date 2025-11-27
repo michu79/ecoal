@@ -31,7 +31,7 @@ I decided to make this an addon instead of an integration because I'm not a pyth
 
 ### Tech stack
 
-- Bun v1.3
+- Node.js v24
 - Docker
 
 ### Setup

@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import type { Config } from "../types";
 import { logger } from "../utils/logger";
 
@@ -6,7 +7,7 @@ class ConfigService {
 
   async loadConfig(): Promise<Config> {
     try {
-      const configData = await Bun.file("/data/options.json").text();
+      const configData = readFileSync("/data/options.json", "utf8");
 
       this.config = JSON.parse(configData);
 
@@ -21,7 +22,7 @@ class ConfigService {
       logger.info("Trying ./data/options.json");
 
       try {
-        const configData = await Bun.file("./data/options.json").text();
+        const configData = readFileSync("./data/options.json", "utf8");
 
         this.config = JSON.parse(configData);
 

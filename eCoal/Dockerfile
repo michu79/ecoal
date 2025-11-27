@@ -1,16 +1,10 @@
-FROM oven/bun:1.3.0-alpine AS base
+FROM node:24-alpine AS base
 
 WORKDIR /app
 
-RUN apk add --no-cache \
-    curl \
-    jq \
-    tzdata \
-    && rm -rf /var/cache/apk/*
+COPY package.json package-lock.json ./
 
-COPY package.json bun.lock* ./
-
-RUN bun install --production --no-save
+RUN npm ci
 
 COPY src/ ./src/
 COPY run.sh ./
@@ -24,6 +18,6 @@ LABEL \
     io.hass.description="Home Assistant addon for eCoal furnace controller integration via MQTT" \
     io.hass.arch="aarch64|i386|amd64" \
     io.hass.type="addon" \
-    io.hass.version="1.0.3"
+    io.hass.version="1.0.4"
 
 CMD ["./run.sh"]
