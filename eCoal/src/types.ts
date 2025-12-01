@@ -13,6 +13,8 @@ export interface Config {
   poll_interval: number;
   log_level: string;
   entity_language: string;
+  tempMappings: string;
+  vtempMappings: string;
 }
 
 export interface ECoalRegister {
@@ -106,7 +108,9 @@ export type TID =
   | "ob3_zaw4d_pos"
   | "cwu_tzad"
   | "ob1_tzad"
-  | "tpow_value";
+  | "tpow_value"
+  | "temp"
+  | "vtemp";
 
 export interface TemperatureControlMapping {
   name: keyof Translations;
@@ -125,3 +129,10 @@ export interface ApiResponse {
   error?: string;
   timestamp: string;
 }
+
+export type CustomMapping = {
+  tid: string;
+  vid: string;
+  name: string;
+  id: string;
+};

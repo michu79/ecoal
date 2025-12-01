@@ -1,14 +1,21 @@
 import merge from "deepmerge";
-import type { Config, ECoalInfoResponse, ECoalResponse } from "../types";
+import type {
+  Config,
+  CustomMapping,
+  ECoalInfoResponse,
+  ECoalResponse,
+} from "../types";
 import { batcher } from "../utils/batcher";
 import { legacyFetch } from "../utils/legacyFetch";
 import { logger } from "../utils/logger";
 
 export class ECoalService {
   private config: Config;
+  private mappings: CustomMapping[];
 
-  constructor(config: Config) {
+  constructor(config: Config, mappings: CustomMapping[]) {
     this.config = config;
+    this.mappings = mappings;
 
     legacyFetch(`http://${this.config.ecoal_host}/info.cgi`, {
       user: this.config.ecoal_username,
@@ -26,6 +33,52 @@ export class ECoalService {
         `Connected to eCoal v${hwData.cmd.hardware.hardwareversion} (${hwData.cmd.hardware.softwareversion})`,
       );
     });
+  }
+
+  async fetchCustomEntries(): Promise<
+    { id: string; value: number | null }[] | undefined
+  > {
+    const joinedQuery = this.mappings.map((entry) => entry.id);
+
+    if (!joinedQuery.length) {
+      logger.warn("No custom temp and vtemp mappings configured, skipping");
+      return;
+    }
+
+    const batches = batcher(joinedQuery, 5);
+
+    const entries: { id: string; value: number | null }[] = [];
+
+    for await (const batch of batches) {
+      const url = `http://${this.config.ecoal_host}/getregister.cgi?device=0&${batch.join("&")}`;
+
+      try {
+        const response = await legacyFetch(url, {
+          user: this.config.ecoal_username,
+          pass: this.config.ecoal_password,
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = (await response.json()) as ECoalResponse;
+
+        data.cmd.device.reg.forEach((entry) => {
+          entries.push({
+            id: `${entry.vid}@${entry.tid}`,
+            value: entry.v ? parseFloat(entry.v) : null,
+          });
+        });
+      } catch (e) {
+        logger.error("Failed to fetch eCoal data:", e);
+        logger.error(`Request '${url}' failed`);
+
+        throw new Error(`Failed to fetch eCoal data: ${e}`);
+      }
+    }
+
+    return entries;
   }
 
   async fetchData(): Promise<ECoalResponse | null> {

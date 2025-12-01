@@ -1,0 +1,43 @@
+configuration:
+  entity_language:
+    name: "Nazwa wpisów MQTT"
+    description: ""
+  ecoal_host:
+    name: "Adres IP eCoal"
+    description: ""
+  ecoal_username:
+    name: "Nazwa użytkownika eCoal"
+    description: ""
+  ecoal_password:
+    name: "Hasło eCoal"
+    description: ""
+  mqtt_broker:
+    name: "Adres serwera MQTT"
+    description: ""
+  mqtt_port:
+    name: "Port MQTT"
+    description: ""
+  mqtt_username:
+    name: "Nazwa użytkownika MQTT"
+    description: ""
+  mqtt_password:
+    name: "Hasło MQTT"
+    description: ""
+  mqtt_topic_prefix:
+    name: "Prefiks tematu MQTT"
+    description: ""
+  device_name:
+    name: "Nazwa urządzenia"
+    description: ""
+  poll_interval:
+    name: "Interwał sondowania (interwał odczytu danych pieca)"
+    description: ""
+  log_level:
+    name: "Poziom logów"
+    description: ""
+  tempMappings:
+    name: "Mapowanie właściwości 'temp'"
+    description: "Format: 1@temp=\"Temp czujnik. 1\";2@vtemp=\"Temp czujnik. 2\""
+  vtempMappings:
+    name: "Mapowanie właściwości 'vtemp'"
+    description: "Format: 21@vtemp=\"Temp. głowica 1\";22@vtemp=\"Temp. głowica 2\""

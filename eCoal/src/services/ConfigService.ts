@@ -1,5 +1,5 @@
 import { readFileSync } from "node:fs";
-import type { Config } from "../types";
+import type { Config, CustomMapping } from "../types";
 import { logger } from "../utils/logger";
 
 class ConfigService {
@@ -36,8 +36,6 @@ class ConfigService {
         logger.error("Failed to load configuration:", error);
         throw e;
       }
-
-      throw error;
     }
   }
 
@@ -47,6 +45,36 @@ class ConfigService {
     }
 
     return this.config;
+  }
+
+  getMappings(): CustomMapping[] {
+    const tempMappings =
+      this.config.tempMappings.split(";").map((entry) => {
+        const [id, name] = entry.split("=");
+        const [vid, tid] = id!.split("@");
+
+        return {
+          id: id!,
+          vid: vid!,
+          tid: tid!,
+          name: name!.replace(/"/g, ""),
+        };
+      }) ?? [];
+
+    const vTempMappings =
+      this.config.vtempMappings.split(";").map((entry) => {
+        const [id, name] = entry.split("=");
+        const [vid, tid] = id!.split("@");
+
+        return {
+          id: id!,
+          vid: vid!,
+          tid: tid!,
+          name: name!.replace(/"/g, ""),
+        };
+      }) ?? [];
+
+    return [...tempMappings, ...vTempMappings];
   }
 
   getDeviceId(): string {

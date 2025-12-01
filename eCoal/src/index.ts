@@ -9,15 +9,17 @@ try {
   logger.info("Loading configuration...");
 
   const config = configService.getConfig();
+  const mappings = configService.getMappings();
 
   setLogLevel(config.log_level);
 
   logger.info("Loading services...");
 
-  const ecoalService = new ECoalService(config);
+  const ecoalService = new ECoalService(config, mappings);
 
   const mqttService = new MqttService(
     config,
+    mappings,
     configService.getDeviceId(),
     (parameter: string, value: string) =>
       ecoalService.setValue(parameter, value),
@@ -50,6 +52,26 @@ try {
       logger.debug("eCoal data updated successfully");
     } else {
       logger.warn("Failed to fetch eCoal data");
+    }
+
+    const customEntries = await ecoalService.fetchCustomEntries();
+
+    if (customEntries) {
+      if (mqttService.isConnected()) {
+        try {
+          mqttService.publishCustomEntries(customEntries);
+        } catch (error) {
+          logger.error("Error publishing custom entries:", error);
+          logger.error("Got custom entries:");
+          console.log(JSON.stringify(customEntries, null, 2));
+
+          throw new Error("Failed to publish custom entries");
+        }
+      }
+
+      logger.debug("Custom entries updated successfully");
+    } else {
+      logger.warn("Failed to fetch custom entries");
     }
   }
 

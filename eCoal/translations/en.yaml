@@ -1,0 +1,43 @@
+configuration:
+  entity_language:
+    name: "MQTT Entity Language"
+    description: ""
+  ecoal_host:
+    name: "eCoal IP Address"
+    description: ""
+  ecoal_username:
+    name: "eCoal Username"
+    description: ""
+  ecoal_password:
+    name: "eCoal Password"
+    description: ""
+  mqtt_broker:
+    name: "MQTT Broker Address"
+    description: ""
+  mqtt_port:
+    name: "MQTT Port"
+    description: ""
+  mqtt_username:
+    name: "MQTT Username"
+    description: ""
+  mqtt_password:
+    name: "MQTT Password"
+    description: ""
+  mqtt_topic_prefix:
+    name: "MQTT Topic Prefix"
+    description: ""
+  device_name:
+    name: "Device Name"
+    description: ""
+  poll_interval:
+    name: "Poll Interval (furnace data read interval)"
+    description: ""
+  log_level:
+    name: "Log Level"
+    description: ""
+  tempMappings:
+    name: "'temp' Property Mapping"
+    description: "Format: 1@temp=\"Sensor Temp.\";2@vtemp=\"Sensor 2 VTemp.\""
+  vtempMappings:
+    name: "'vtemp' Property Mapping"
+    description: "Format: 1@vtemp=\"Sensor VTemp.\";2@vtemp=\"Sensor 2 VTemp.\""

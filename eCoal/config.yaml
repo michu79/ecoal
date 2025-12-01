@@ -1,7 +1,7 @@
 name: "eCoal Furnace Controller"
 description: "Home Assistant addon for eCoal furnace controller integration via MQTT"
 url: "https://github.com/MT-ZD/ecoal_controller"
-version: "1.0.5"
+version: "1.0.6"
 slug: "ecoal_controller"
 arch:
   - aarch64
@@ -25,6 +25,8 @@ options:
   device_name: "eCoal Furnace"
   poll_interval: 30
   log_level: "info"
+  tempMappings: ""
+  vtempMappings: ""
 schema:
   entity_language: str
   ecoal_host: str
@@ -38,3 +40,5 @@ schema:
   device_name: str
   poll_interval: int(5,300)
   log_level: list(debug|info|warning|error)
+  tempMappings: match(^(\d+@\w+="[^"]*";)*(\d+@\w+="[^"]*")?$)
+  vtempMappings: match(^(\d+@\w+="[^"]*";)*(\d+@\w+="[^"]*")?$)

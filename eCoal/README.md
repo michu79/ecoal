@@ -51,7 +51,9 @@ I decided to make this an addon instead of an integration because I'm not a pyth
   "device_name": "eCoal Furnace",
   "poll_interval": 30,
   "log_level": "info",
-  "entity_language": "en"
+  "entity_language": "en",
+  "tempMappings": "1@temp=\"Temp czujnik. 1\";2@vtemp=\"Temp czujnik. 2\"",
+  "vtempMappings": "21@vtemp=\"Temp. głowica 1\";22@vtemp=\"Temp. głowica 2\""
 }
 ```
 

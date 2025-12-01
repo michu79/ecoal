@@ -1,23 +1,26 @@
 import mqtt from "mqtt";
 import { sensorMappings, temperatureControlMappings } from "../config/sensors";
 import t from "../i18n/t";
-import type { Config, ECoalResponse } from "../types";
+import type { Config, CustomMapping, ECoalResponse } from "../types";
 import { logger } from "../utils/logger";
 
 export class MqttService {
   private mqttClient!: mqtt.MqttClient;
   private config: Config;
+  private mappings: CustomMapping[];
   private deviceId: string;
   private setECoalValue: (parameter: string, value: string) => Promise<boolean>;
 
   constructor(
     config: Config,
+    mappings: CustomMapping[],
     deviceId: string,
     setECoalValue: (parameter: string, value: string) => Promise<boolean>,
   ) {
     this.config = config;
     this.deviceId = deviceId;
     this.setECoalValue = setECoalValue;
+    this.mappings = mappings;
   }
 
   connect(): void {
@@ -88,6 +91,33 @@ export class MqttService {
 
         logger.debug(
           `Published number data: ${config.mqttUniqueId} = ${register.v}`,
+        );
+      }
+    });
+  }
+
+  publishCustomEntries(data: { id: string; value: number | null }[]): void {
+    if (!this.mqttClient || !this.mqttClient.connected) {
+      return;
+    }
+
+    data.forEach((sensor) => {
+      const name = this.mappings.find(
+        (mapping) => mapping.id === sensor.id,
+      )?.name;
+
+      if (!name) {
+        logger.warn(`No mapping found for sensor ${sensor.id}`);
+        return;
+      }
+
+      const stateTopic = `${this.config.mqtt_topic_prefix}/sensor/${this.deviceId}/custom_${sensor.id}/state`;
+
+      if (sensor.value) {
+        this.mqttClient.publish(stateTopic, sensor.value.toString());
+
+        logger.debug(
+          `Published sensor data: custom_${sensor.id} = ${sensor.value}`,
         );
       }
     });
