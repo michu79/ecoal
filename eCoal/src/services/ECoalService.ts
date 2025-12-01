@@ -38,6 +38,8 @@ export class ECoalService {
   async fetchCustomEntries(): Promise<
     { id: string; value: number | null }[] | undefined
   > {
+    logger.info("Fetching custom entries");
+
     const joinedQuery = this.mappings.map((entry) => entry.id);
 
     if (!joinedQuery.length) {
@@ -64,9 +66,25 @@ export class ECoalService {
 
         const data = (await response.json()) as ECoalResponse;
 
-        data.cmd.device.reg.forEach((entry) => {
+        batch.forEach((id) => {
+          const entry = data.cmd.device.reg.find(
+            (reg) => `${reg.vid}@${reg.tid}` === id,
+          );
+
+          if (!entry) {
+            logger.warn(`Custom entry ${id} not found in response`);
+            return;
+          }
+
+          if (!entry.v) {
+            logger.warn(
+              `Custom entry ${id} has no value, skipping. Got: ${JSON.stringify(entry)}`,
+            );
+            return;
+          }
+
           entries.push({
-            id: `${entry.vid}@${entry.tid}`,
+            id,
             value: entry.v ? parseFloat(entry.v) : null,
           });
         });
