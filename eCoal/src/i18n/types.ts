@@ -9,6 +9,7 @@ export type Translations = {
   auto_mode: string;
   pump_1: string;
   pump_2: string;
+  out_cwu: string;
   boiler_setpoint: string;
   dhw_setpoint: string;
   feeder_temp: string;
@@ -30,4 +31,8 @@ export type Translations = {
   circuit_3_room_setpoint: string;
   circuit_3_valve_setpoint: string;
   circuit_3_valve_position: string;
+  pod_typ: string;
+  retort_manual: string;
+  retort_group: string;
+  retort_ecoal: string;
 };

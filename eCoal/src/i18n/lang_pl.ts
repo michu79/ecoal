@@ -11,6 +11,7 @@ export default {
   auto_mode: "Tryb automatyczny",
   pump_1: "Pompa 1",
   pump_2: "Pompa 2",
+  out_cwu: "Pompa CWU",
   boiler_setpoint: "Temp. zad. boilera",
   dhw_setpoint: "Temp. zad. CWU",
   feeder_temp: "Temp. podajnika",
@@ -32,4 +33,8 @@ export default {
   circuit_3_room_setpoint: "Temp. zad. pom. 3",
   circuit_3_valve_setpoint: "Temp. zad. zaworu pom. 3",
   circuit_3_valve_position: "Pozycja zaworu pom. 3",
+  pod_typ: "Typ podajnika",
+  retort_manual: "Retortowy Ręczny",
+  retort_group: "Retortowy Grupowy",
+  retort_ecoal: "Retortowy eCoal",
 } satisfies Translations;

@@ -97,6 +97,7 @@ export class ECoalService {
           "twew_value",
           "t1_value",
           "t2_value",
+          "out_cwu",
           "tsp_value",
           "act_dm_speed",
           "kot_tzad",
@@ -116,6 +117,7 @@ export class ECoalService {
           "ob3_pok_tzad",
           "ob3_zaw4d_tzad",
           "ob3_zaw4d_pos",
+          "pod_typ",
         ],
         5,
       );

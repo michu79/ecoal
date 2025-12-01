@@ -11,6 +11,7 @@ export default {
   auto_mode: "Auto mode",
   pump_1: "Pump 1",
   pump_2: "Pump 2",
+  out_cwu: "DHW Pump",
   boiler_setpoint: "Boiler setpoint",
   dhw_setpoint: "DHW setpoint",
   feeder_temp: "Feeder temp.",
@@ -32,4 +33,8 @@ export default {
   circuit_3_room_setpoint: "Circuit 3 room setpoint.",
   circuit_3_valve_setpoint: "Circuit 3 valve setpoint.",
   circuit_3_valve_position: "Circuit 3 valve position.",
+  pod_typ: "Feeder type",
+  retort_manual: "Retort Manual",
+  retort_group: "Retort Group",
+  retort_ecoal: "Retort eCoal",
 } satisfies Translations;

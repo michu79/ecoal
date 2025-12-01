@@ -70,7 +70,8 @@ export interface SensorMapping {
   mqttUniqueId: string;
   tid: TID;
   unit?: string;
-  type?: "temp" | "percentage" | "state";
+  type?: "temp" | "percentage" | "state" | "enum";
+  values?: Record<string, keyof Translations>;
 }
 
 export type TID =
@@ -108,9 +109,11 @@ export type TID =
   | "ob3_zaw4d_pos"
   | "cwu_tzad"
   | "ob1_tzad"
+  | "out_cwu"
   | "tpow_value"
   | "temp"
-  | "vtemp";
+  | "vtemp"
+  | "pod_typ";
 
 export interface TemperatureControlMapping {
   name: keyof Translations;

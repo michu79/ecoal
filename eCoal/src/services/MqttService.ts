@@ -58,7 +58,12 @@ export class MqttService {
       const register = data.cmd.device.reg.find((r) => r.tid === sensor.tid);
 
       if (register) {
-        const value = register.v;
+        let value = register.v;
+
+        if (sensor.type === "enum" && register.v && sensor.values) {
+          value = sensor.values[register.v];
+        }
+
         const stateTopic = `${this.config.mqtt_topic_prefix}/sensor/${this.deviceId}/${sensor.mqttUniqueId}/state`;
 
         if (value) {

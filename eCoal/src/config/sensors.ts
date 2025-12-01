@@ -69,6 +69,12 @@ export const sensorMappings: SensorMapping[] = [
     type: "state",
   },
   {
+    name: "out_cwu",
+    mqttUniqueId: "sensor_out_cwu",
+    tid: "out_cwu",
+    type: "state",
+  },
+  {
     name: "boiler_setpoint",
     mqttUniqueId: "sensor_boiler_setpoint",
     tid: "kot_tzad",
@@ -214,6 +220,18 @@ export const sensorMappings: SensorMapping[] = [
     tid: "ob3_zaw4d_pos",
     unit: "%",
     type: "percentage",
+  },
+  {
+    name: "pod_typ",
+    mqttUniqueId: "sensor_pod_typ",
+    tid: "pod_typ",
+    unit: "",
+    type: "enum",
+    values: {
+      1: "retort_manual",
+      2: "retort_group",
+      3: "retort_ecoal",
+    },
   },
 ];
 

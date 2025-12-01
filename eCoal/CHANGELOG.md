@@ -2,6 +2,8 @@
 
 ## 1.0.6
 - Added support for custom entry mappings
+- Added feeder type
+- Added DHW pump status
 
 ## 1.0.4
 - Changed runtime to Node.js for compatibility with older hardware
