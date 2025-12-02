@@ -114,7 +114,7 @@ export class MqttService {
         return;
       }
 
-      const stateTopic = `${this.config.mqtt_topic_prefix}/sensor/${this.deviceId}/custom_${mapping.safeId}/state`;
+      const stateTopic = `${this.config.mqtt_topic_prefix}/sensor/${this.deviceId}/sensor_custom_${mapping.safeId}/state`;
 
       if (sensor.value) {
         this.mqttClient.publish(stateTopic, sensor.value.toString());
@@ -164,8 +164,8 @@ export class MqttService {
     });
 
     this.mappings.forEach((mapping) => {
-      const discoveryTopic = `${this.config.mqtt_topic_prefix}/sensor/${this.deviceId}/custom_${mapping.safeId}/config`;
-      const stateTopic = `${this.config.mqtt_topic_prefix}/sensor/${this.deviceId}/custom_${mapping.safeId}/state`;
+      const discoveryTopic = `${this.config.mqtt_topic_prefix}/sensor/${this.deviceId}/sensor_custom_${mapping.safeId}/config`;
+      const stateTopic = `${this.config.mqtt_topic_prefix}/sensor/${this.deviceId}/sensor_custom_${mapping.safeId}/state`;
 
       const config = {
         name: mapping.name,
