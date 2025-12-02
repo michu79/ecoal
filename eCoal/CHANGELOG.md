@@ -1,5 +1,8 @@
 # What’s changed
 
+## 1.0.7
+- Fixed startup issue with no custom entry mappings
+
 ## 1.0.6
 - Added support for custom entry mappings
 - Added feeder type

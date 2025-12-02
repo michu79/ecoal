@@ -48,33 +48,35 @@ class ConfigService {
   }
 
   getMappings(): CustomMapping[] {
-    const tempMappings =
-      this.config.tempMappings.split(";").map((entry) => {
-        const [id, name] = entry.split("=");
-        const [vid, tid] = id!.split("@");
+    const tempMappings = this.config.tempMappings
+      ? this.config.tempMappings.split(";").map((entry) => {
+          const [id, name] = entry.split("=");
+          const [vid, tid] = id!.split("@");
 
-        return {
-          id: id!,
-          vid: vid!,
-          tid: tid!,
-          name: name!.replace(/"/g, ""),
-          safeId: id!.replace("@", "_"),
-        };
-      }) ?? [];
+          return {
+            id: id!,
+            vid: vid!,
+            tid: tid!,
+            name: name!.replace(/"/g, ""),
+            safeId: id!.replace("@", "_"),
+          };
+        })
+      : [];
 
-    const vTempMappings =
-      this.config.vtempMappings.split(";").map((entry) => {
-        const [id, name] = entry.split("=");
-        const [vid, tid] = id!.split("@");
+    const vTempMappings = this.config.vtempMappings
+      ? this.config.vtempMappings.split(";").map((entry) => {
+          const [id, name] = entry.split("=");
+          const [vid, tid] = id!.split("@");
 
-        return {
-          id: id!,
-          vid: vid!,
-          tid: tid!,
-          name: name!.replace(/"/g, ""),
-          safeId: id!.replace("@", "_"),
-        };
-      }) ?? [];
+          return {
+            id: id!,
+            vid: vid!,
+            tid: tid!,
+            name: name!.replace(/"/g, ""),
+            safeId: id!.replace("@", "_"),
+          };
+        })
+      : [];
 
     return [...tempMappings, ...vTempMappings];
   }
