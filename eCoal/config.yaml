@@ -1,7 +1,7 @@
 name: "eCoal Furnace Controller (beta)"
 description: "Home Assistant addon for eCoal furnace controller integration via MQTT"
 url: "https://github.com/MT-ZD/ecoal_controller"
-version: "1.0.6_RC2"
+version: "1.0.6_RC3"
 slug: "ecoal_controller"
 arch:
   - aarch64

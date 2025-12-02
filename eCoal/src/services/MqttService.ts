@@ -165,6 +165,32 @@ export class MqttService {
       });
     });
 
+    this.mappings.forEach((mapping) => {
+      const discoveryTopic = `${this.config.mqtt_topic_prefix}/sensor/${this.deviceId}/custom_${mapping.id}/config`;
+      const stateTopic = `${this.config.mqtt_topic_prefix}/sensor/${this.deviceId}/custom_${mapping.id}/state`;
+
+      const config = {
+        name: mapping.name,
+        unique_id: `${this.deviceId}_${mapping.id}`,
+        state_topic: stateTopic,
+        unit_of_measurement: "degree",
+        device_class: "temperature",
+        state_class: "measurement",
+        icon: "mdi:thermometer",
+
+        device: {
+          identifiers: [this.deviceId],
+          name: this.config.device_name,
+          model: "eCoal Controller",
+          manufacturer: "eCoal",
+        },
+      };
+
+      this.mqttClient.publish(discoveryTopic, JSON.stringify(config), {
+        retain: true,
+      });
+    });
+
     const switchConfig = {
       name: t("auto_mode"),
       unique_id: `${this.deviceId}_auto_mode`,
