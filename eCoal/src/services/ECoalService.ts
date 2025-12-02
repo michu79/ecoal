@@ -78,9 +78,8 @@ export class ECoalService {
 
           if (!entry.v) {
             logger.warn(
-              `Custom entry ${id} has no value, skipping. Got: ${JSON.stringify(entry)}`,
+              `Custom entry ${id} has no value. Got: ${JSON.stringify(entry)}`,
             );
-            return;
           }
 
           entries.push({

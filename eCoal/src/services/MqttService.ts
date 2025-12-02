@@ -116,13 +116,14 @@ export class MqttService {
 
       const stateTopic = `${this.config.mqtt_topic_prefix}/sensor/${this.deviceId}/sensor_custom_${mapping.safeId}/state`;
 
-      if (sensor.value) {
-        this.mqttClient.publish(stateTopic, sensor.value.toString());
+      this.mqttClient.publish(
+        stateTopic,
+        sensor.value?.toString() ?? "Unknown",
+      );
 
-        logger.debug(
-          `Published sensor data: custom_${sensor.id} = ${sensor.value}`,
-        );
-      }
+      logger.debug(
+        `Published sensor data: custom_${sensor.id} = ${sensor.value}`,
+      );
     });
   }
 
