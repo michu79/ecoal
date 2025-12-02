@@ -107,16 +107,14 @@ export class MqttService {
     }
 
     data.forEach((sensor) => {
-      const name = this.mappings.find(
-        (mapping) => mapping.id === sensor.id,
-      )?.name;
+      const mapping = this.mappings.find((mapping) => mapping.id === sensor.id);
 
-      if (!name) {
+      if (!mapping) {
         logger.warn(`No mapping found for sensor ${sensor.id}`);
         return;
       }
 
-      const stateTopic = `${this.config.mqtt_topic_prefix}/sensor/${this.deviceId}/custom_${sensor.id}/state`;
+      const stateTopic = `${this.config.mqtt_topic_prefix}/sensor/${this.deviceId}/custom_${mapping.safeId}/state`;
 
       if (sensor.value) {
         this.mqttClient.publish(stateTopic, sensor.value.toString());
@@ -166,12 +164,12 @@ export class MqttService {
     });
 
     this.mappings.forEach((mapping) => {
-      const discoveryTopic = `${this.config.mqtt_topic_prefix}/sensor/${this.deviceId}/custom_${mapping.id}/config`;
-      const stateTopic = `${this.config.mqtt_topic_prefix}/sensor/${this.deviceId}/custom_${mapping.id}/state`;
+      const discoveryTopic = `${this.config.mqtt_topic_prefix}/sensor/${this.deviceId}/custom_${mapping.safeId}/config`;
+      const stateTopic = `${this.config.mqtt_topic_prefix}/sensor/${this.deviceId}/custom_${mapping.safeId}/state`;
 
       const config = {
         name: mapping.name,
-        unique_id: `${this.deviceId}_${mapping.id}`,
+        unique_id: `${this.deviceId}_${mapping.safeId}`,
         state_topic: stateTopic,
         unit_of_measurement: "degree",
         device_class: "temperature",

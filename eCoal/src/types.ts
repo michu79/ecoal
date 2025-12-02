@@ -138,4 +138,5 @@ export type CustomMapping = {
   vid: string;
   name: string;
   id: string;
+  safeId: string;
 };

@@ -58,6 +58,7 @@ class ConfigService {
           vid: vid!,
           tid: tid!,
           name: name!.replace(/"/g, ""),
+          safeId: id!.replace("@", "-"),
         };
       }) ?? [];
 
@@ -71,6 +72,7 @@ class ConfigService {
           vid: vid!,
           tid: tid!,
           name: name!.replace(/"/g, ""),
+          safeId: id!.replace("@", "-"),
         };
       }) ?? [];
 
