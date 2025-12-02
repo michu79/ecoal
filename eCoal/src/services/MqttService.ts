@@ -172,7 +172,7 @@ export class MqttService {
         name: mapping.name,
         unique_id: `${this.deviceId}_${mapping.safeId}`,
         state_topic: stateTopic,
-        unit_of_measurement: "degree",
+        unit_of_measurement: "°C",
         device_class: "temperature",
         state_class: "measurement",
         icon: "mdi:thermometer",
