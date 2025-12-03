@@ -37,4 +37,5 @@ export default {
   retort_manual: "Retortowy Ręczny",
   retort_group: "Retortowy Grupowy",
   retort_ecoal: "Retortowy eCoal",
+  next_fuel_date: "Data następnego zasypu",
 } satisfies Translations;

@@ -70,7 +70,7 @@ export interface SensorMapping {
   mqttUniqueId: string;
   tid: TID;
   unit?: string;
-  type?: "temp" | "percentage" | "state" | "enum";
+  type?: "temp" | "percentage" | "state" | "enum" | "date";
   values?: Record<string, keyof Translations>;
 }
 

@@ -233,6 +233,12 @@ export const sensorMappings: SensorMapping[] = [
       3: "retort_ecoal",
     },
   },
+  {
+    name: "next_fuel_date",
+    mqttUniqueId: "sensor_next_fuel_time",
+    tid: "next_fuel_time",
+    type: "date",
+  },
 ];
 
 export const temperatureControlMappings: TemperatureControlMapping[] = [

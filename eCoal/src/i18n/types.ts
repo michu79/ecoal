@@ -35,4 +35,5 @@ export type Translations = {
   retort_manual: string;
   retort_group: string;
   retort_ecoal: string;
+  next_fuel_date: string;
 };

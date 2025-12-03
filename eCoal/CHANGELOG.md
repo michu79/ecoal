@@ -1,5 +1,8 @@
 # What’s changed
 
+## 1.0.8
+- Next fuel date
+
 ## 1.0.7
 - Fixed startup issue with no custom entry mappings
 

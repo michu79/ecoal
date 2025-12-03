@@ -1,8 +1,41 @@
 import mqtt from "mqtt";
 import { sensorMappings, temperatureControlMappings } from "../config/sensors";
 import t from "../i18n/t";
-import type { Config, CustomMapping, ECoalResponse } from "../types";
+import type {
+  Config,
+  CustomMapping,
+  ECoalResponse,
+  SensorMapping,
+} from "../types";
 import { logger } from "../utils/logger";
+
+function getDeviceClass(
+  sensorType?: SensorMapping["type"],
+): string | undefined {
+  switch (sensorType) {
+    case "temp":
+      return "temperature";
+    case "date":
+      return "timestamp";
+    default:
+      return undefined;
+  }
+}
+
+function getSensorIcon(sensorType?: SensorMapping["type"]): string {
+  switch (sensorType) {
+    case "temp":
+      return "mdi:thermometer";
+    case "percentage":
+      return "mdi:percent";
+    case "state":
+      return "mdi:toggle-switch";
+    case "date":
+      return "mdi:calendar-clock";
+    default:
+      return "mdi:gauge";
+  }
+}
 
 export class MqttService {
   private mqttClient!: mqtt.MqttClient;
@@ -143,16 +176,9 @@ export class MqttService {
         unique_id: `${this.deviceId}_${sensor.mqttUniqueId}`,
         state_topic: stateTopic,
         unit_of_measurement: sensor.unit,
-        device_class: sensor.type === "temp" ? "temperature" : undefined,
+        device_class: getDeviceClass(sensor.type),
         state_class: sensor.type === "temp" ? "measurement" : undefined,
-        icon:
-          sensor.type === "temp"
-            ? "mdi:thermometer"
-            : sensor.type === "percentage"
-              ? "mdi:percent"
-              : sensor.type === "state"
-                ? "mdi:toggle-switch"
-                : "mdi:gauge",
+        icon: getSensorIcon(sensor.type),
         device: {
           identifiers: [this.deviceId],
           name: this.config.device_name,
