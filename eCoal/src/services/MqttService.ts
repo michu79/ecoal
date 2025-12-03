@@ -37,6 +37,16 @@ function getSensorIcon(sensorType?: SensorMapping["type"]): string {
   }
 }
 
+function convertUnixToIsoString(unixTimestamp: string): string {
+  const timestamp = parseInt(unixTimestamp, 10);
+
+  if (isNaN(timestamp)) {
+    return unixTimestamp;
+  }
+
+  return new Date(timestamp * 1000).toISOString();
+}
+
 export class MqttService {
   private mqttClient!: mqtt.MqttClient;
   private config: Config;
@@ -97,6 +107,8 @@ export class MqttService {
           value = sensor.values[register.v]
             ? t(sensor.values[register.v]!)
             : "";
+        } else if (sensor.type === "date" && register.v) {
+          value = convertUnixToIsoString(register.v);
         }
 
         const stateTopic = `${this.config.mqtt_topic_prefix}/sensor/${this.deviceId}/${sensor.mqttUniqueId}/state`;
