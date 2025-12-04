@@ -10,6 +10,7 @@ export type Translations = {
   pump_1: string;
   pump_2: string;
   out_cwu: string;
+  out_miesz: string;
   boiler_setpoint: string;
   dhw_setpoint: string;
   feeder_temp: string;
