@@ -115,6 +115,7 @@ export class ECoalService {
           "t1_value",
           "t2_value",
           "out_cwu",
+          "out_miesz",
           "tsp_value",
           "act_dm_speed",
           "kot_tzad",
