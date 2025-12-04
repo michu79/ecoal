@@ -92,6 +92,7 @@ export type TID =
   | "out_pomp1"
   | "out_cwutzad"
   | "out_pomp2"
+  | "out_miesz"
   | "tzew_act"
   | "kot_tact"
   | "ob1_pok_tact"
