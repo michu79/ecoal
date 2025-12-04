@@ -74,6 +74,12 @@ export const sensorMappings: SensorMapping[] = [
     tid: "out_cwu",
     type: "state",
   },
+    {
+    name: "out_miesz",
+    mqttUniqueId: "sensor_out_miesz",
+    tid: "out_miesz",
+    type: "state",
+  },
   {
     name: "boiler_setpoint",
     mqttUniqueId: "sensor_boiler_setpoint",
